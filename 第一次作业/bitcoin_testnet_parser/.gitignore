@@ -1,0 +1,5 @@
+__pycache__/
+output/
+raw_tx.hex
+raw_block.hex
+*.pyc
