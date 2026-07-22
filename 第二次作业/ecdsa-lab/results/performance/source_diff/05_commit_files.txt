@@ -1,0 +1,48 @@
+commit 2f0762fa8fd30b457bc5dcf53403123212091df5
+Author:     Tim Ruffing <crypto@timruffing.de>
+AuthorDate: Thu Nov 23 22:20:02 2023 +0100
+Commit:     Tim Ruffing <crypto@timruffing.de>
+CommitDate: Fri Nov 24 08:11:08 2023 +0100
+
+    field: Remove x86_64 asm
+    
+    Widely available versions of GCC and Clang beat our field asm on -O2.
+    In particular, GCC 10.5.0, which is Bitcoin Core's current compiler
+    for official x86_64 builds, produces code that is > 20% faster for
+    fe_mul and > 10% faster for signature verification (see #726).
+    
+    These are the alternatives to this PR:
+    
+    We could replace our current asm with the fastest compiler output
+    that we can find. This is potentially faster, but it has multiple
+    drawbacks:
+     - It's more coding work because it needs detailed benchmarks (e.g.,
+       with many compiler/options).
+     - It's more review work because we need to deal with inline asm
+       (including clobbers etc.) and there's a lack of experts reviewers
+       in this area.
+     - It's not unlikely that we'll fall behind again in a few compiler
+       versions, and then we have to deal with this again, i.e., redo the
+       benchmarks. Given our history here, I doubt that we'll revolve
+       this timely.
+    
+    We could change the default of the asm build option to off. But this
+    will also disable the scalar asm, which is still faster.
+    
+    We could split the build option into two separate options for field
+    and scalar asm and only disable the field asm by default. But this
+    adds complexity to the build and to the test matrix.
+    
+    My conclusion is that this PR gets the low-hanging fruit in terms of
+    performance. It simplifies our code significantly. It's clearly an
+    improvement, and it's very easy to review. Whether re-introducing
+    better asm (whether from a compiler or from CryptOpt) is worth the
+    hassle can be evaluated separately, and should not hold up this
+    improvement.
+    
+    Solves #726.
+
+M	Makefile.am
+M	README.md
+D	src/field_5x52_asm_impl.h
+M	src/field_5x52_impl.h

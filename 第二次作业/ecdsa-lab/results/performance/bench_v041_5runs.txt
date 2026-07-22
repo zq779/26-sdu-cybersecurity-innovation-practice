@@ -1,0 +1,70 @@
+=============== v0.4.1 Run 1 ===============
+Benchmark                     ,    Min(us)    ,    Avg(us)    ,    Max(us)    
+
+ecdsa_verify                  ,    27.5       ,    28.3       ,    28.8    
+ecdsa_sign                    ,    20.4       ,    20.7       ,    21.1    
+ec_keygen                     ,    14.7       ,    14.9       ,    15.5    
+ecdh                          ,    25.4       ,    26.3       ,    27.2    
+schnorrsig_sign               ,    15.5       ,    15.7       ,    16.0    
+schnorrsig_verify             ,    28.5       ,    29.1       ,    29.7    
+ellswift_encode               ,    15.9       ,    16.2       ,    16.7    
+ellswift_decode               ,     6.61      ,     6.94      ,     7.12   
+ellswift_keygen               ,    30.7       ,    31.0       ,    31.5    
+ellswift_ecdh                 ,    29.0       ,    29.5       ,    30.3    
+
+=============== v0.4.1 Run 2 ===============
+Benchmark                     ,    Min(us)    ,    Avg(us)    ,    Max(us)    
+
+ecdsa_verify                  ,    28.0       ,    28.6       ,    29.0    
+ecdsa_sign                    ,    20.3       ,    20.6       ,    21.1    
+ec_keygen                     ,    14.6       ,    14.9       ,    15.3    
+ecdh                          ,    26.1       ,    26.3       ,    26.9    
+schnorrsig_sign               ,    15.3       ,    15.6       ,    16.3    
+schnorrsig_verify             ,    28.7       ,    29.0       ,    29.4    
+ellswift_encode               ,    15.6       ,    16.3       ,    16.8    
+ellswift_decode               ,     6.82      ,     6.93      ,     6.98   
+ellswift_keygen               ,    30.7       ,    31.4       ,    31.9    
+ellswift_ecdh                 ,    29.1       ,    29.7       ,    30.3    
+
+=============== v0.4.1 Run 3 ===============
+Benchmark                     ,    Min(us)    ,    Avg(us)    ,    Max(us)    
+
+ecdsa_verify                  ,    28.3       ,    28.6       ,    29.1    
+ecdsa_sign                    ,    20.3       ,    20.7       ,    21.1    
+ec_keygen                     ,    14.7       ,    14.9       ,    15.2    
+ecdh                          ,    26.1       ,    26.6       ,    27.0    
+schnorrsig_sign               ,    15.3       ,    15.7       ,    16.1    
+schnorrsig_verify             ,    28.5       ,    28.9       ,    29.5    
+ellswift_encode               ,    15.8       ,    16.3       ,    16.7    
+ellswift_decode               ,     6.67      ,     6.94      ,     7.25   
+ellswift_keygen               ,    30.7       ,    31.3       ,    31.9    
+ellswift_ecdh                 ,    28.3       ,    29.3       ,    29.9    
+
+=============== v0.4.1 Run 4 ===============
+Benchmark                     ,    Min(us)    ,    Avg(us)    ,    Max(us)    
+
+ecdsa_verify                  ,    28.2       ,    28.6       ,    29.2    
+ecdsa_sign                    ,    20.3       ,    20.6       ,    20.9    
+ec_keygen                     ,    14.3       ,    14.8       ,    15.2    
+ecdh                          ,    26.1       ,    26.7       ,    27.1    
+schnorrsig_sign               ,    15.5       ,    15.8       ,    16.1    
+schnorrsig_verify             ,    28.5       ,    29.0       ,    29.4    
+ellswift_encode               ,    15.6       ,    16.0       ,    16.3    
+ellswift_decode               ,     6.79      ,     6.96      ,     7.28   
+ellswift_keygen               ,    30.6       ,    30.9       ,    31.4    
+ellswift_ecdh                 ,    28.9       ,    29.7       ,    30.0    
+
+=============== v0.4.1 Run 5 ===============
+Benchmark                     ,    Min(us)    ,    Avg(us)    ,    Max(us)    
+
+ecdsa_verify                  ,    27.4       ,    27.9       ,    29.2    
+ecdsa_sign                    ,    20.0       ,    20.5       ,    22.3    
+ec_keygen                     ,    14.3       ,    14.5       ,    14.8    
+ecdh                          ,    25.8       ,    26.0       ,    26.1    
+schnorrsig_sign               ,    15.2       ,    15.4       ,    15.6    
+schnorrsig_verify             ,    28.1       ,    28.4       ,    28.7    
+ellswift_encode               ,    15.5       ,    15.7       ,    16.1    
+ellswift_decode               ,     6.77      ,     6.89      ,     6.98   
+ellswift_keygen               ,    30.4       ,    30.5       ,    30.7    
+ellswift_ecdh                 ,    28.6       ,    29.0       ,    29.2    
+

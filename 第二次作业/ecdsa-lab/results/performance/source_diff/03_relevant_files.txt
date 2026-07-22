@@ -1,0 +1,12 @@
+M	CMakeLists.txt
+M	Makefile.am
+A	cmake/GeneratePkgConfigFile.cmake
+M	configure.ac
+M	src/CMakeLists.txt
+M	src/asm/field_10x26_arm.s
+M	src/field.h
+M	src/field_10x26_impl.h
+D	src/field_5x52_asm_impl.h
+M	src/field_5x52_impl.h
+M	src/field_5x52_int128_impl.h
+M	src/field_impl.h

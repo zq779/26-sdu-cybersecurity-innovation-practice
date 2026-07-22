@@ -1,0 +1,24 @@
+commit 4a496a36fb07d6cc8c99e591994f4ce0c3b1174c
+Author: Tim Ruffing <crypto@timruffing.de>
+Date:   Sat Apr 1 15:35:50 2023 +0900
+
+    ct: Use volatile "trick" in all fe/scalar cmov implementations
+    
+    Apparently clang 15 is able to compile our cmov code into a branch,
+    at least for fe_cmov and fe_storage_cmov. This commit makes the
+    condition volatile in all cmov implementations (except ge but that
+    one only calls into the fe impls).
+    
+    This is just a quick fix. We should still look into other methods,
+    e.g., asm and #457. We should also consider not caring about
+    constant-time in scalar_low_impl.h
+    
+    We should also consider testing on very new compilers in nightly CI,
+    see https://github.com/bitcoin-core/secp256k1/pull/864#issuecomment-769211867
+
+ src/field_10x26_impl.h | 6 ++++--
+ src/field_5x52_impl.h  | 6 ++++--
+ src/scalar_4x64_impl.h | 3 ++-
+ src/scalar_8x32_impl.h | 3 ++-
+ src/scalar_low_impl.h  | 3 ++-
+ 5 files changed, 14 insertions(+), 7 deletions(-)
