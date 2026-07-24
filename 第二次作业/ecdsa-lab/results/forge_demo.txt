@@ -1,0 +1,25 @@
+============================================
+ECDSA chosen-hash construction experiment
+libsecp256k1 official verification is used
+============================================
+
+[1] Normal ECDSA signature
+Normal signature verification: PASS
+
+[2] Chosen-hash signature construction
+The forging function receives only the public key, not the private key.
+Chosen digest e' : 20bbc31f75be9b24c22e67f8faaca125efecee5ce0366530b0604c6e74e9941c
+Forged r'        : 8597120da136e5ba1525d8de31d9b0c7f2ad178ac5fdfe5b0bd23947e1fa0b31
+Forged s'        : 1cddec1e828afef77c35b0d03a170e1dc24d4ebb01170ea829f49fa76a34aae9
+Verification on chosen digest: PASS
+
+[3] Negative control using a real message
+Message: Pay Alice 1 BTC
+SHA256(message)   : 44b8841b753dd6b72b90dfb80f64fedcb869d00d0c24dd68a8f8ad0cc96b8643
+Same signature on SHA256(message): FAIL (expected)
+
+============================================
+Overall experiment result: PASS
+ECDSA itself was not broken.
+The construction works only when an untrusted digest is accepted directly.
+============================================

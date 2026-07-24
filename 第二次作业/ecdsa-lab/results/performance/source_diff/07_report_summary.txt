@@ -1,0 +1,22 @@
+===== Performance commit =====
+2f0762fa8fd30b457bc5dcf53403123212091df5
+Author: Tim Ruffing
+Date: 2023-11-23
+
+field: Remove x86_64 asm
+
+Widely available versions of GCC and Clang beat our field asm on -O2.
+In particular, GCC 10.5.0, which is Bitcoin Core's current compiler
+for official x86_64 builds, produces code that is > 20% faster for
+fe_mul and > 10% faster for signature verification (see #726).
+
+These are the alternatives to this PR:
+
+
+===== Files changed =====
+ Makefile.am               |   1 -
+ README.md                 |   2 +-
+ src/field_5x52_asm_impl.h | 504 ----------------------------------------------
+ src/field_5x52_impl.h     |   4 -
+ 4 files changed, 1 insertion(+), 510 deletions(-)
+ delete mode 100644 src/field_5x52_asm_impl.h

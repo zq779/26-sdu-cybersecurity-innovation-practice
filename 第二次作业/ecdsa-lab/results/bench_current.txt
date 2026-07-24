@@ -1,0 +1,12 @@
+Benchmark                     ,    Min(us)    ,    Avg(us)    ,    Max(us)    
+
+ecdsa_verify                  ,    29.3       ,    30.6       ,    32.3    
+ecdsa_sign                    ,    19.1       ,    19.7       ,    20.9    
+ec_keygen                     ,    13.1       ,    13.5       ,    14.4    
+ecdh                          ,    27.6       ,    29.9       ,    33.7    
+schnorrsig_sign               ,    14.2       ,    14.6       ,    15.2    
+schnorrsig_verify             ,    29.5       ,    31.0       ,    33.0    
+ellswift_encode               ,    15.7       ,    16.0       ,    17.2    
+ellswift_decode               ,     6.80      ,     6.85      ,     6.94   
+ellswift_keygen               ,    28.2       ,    29.2       ,    31.5    
+ellswift_ecdh                 ,    30.7       ,    34.0       ,    37.4    

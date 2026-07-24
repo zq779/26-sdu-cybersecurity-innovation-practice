@@ -1,0 +1,41 @@
+diff --git a/Makefile.am b/Makefile.am
+index 9d0dc3d..5498617 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -37,7 +37,6 @@ noinst_HEADERS += src/field_10x26_impl.h
+ noinst_HEADERS += src/field_5x52.h
+ noinst_HEADERS += src/field_5x52_impl.h
+ noinst_HEADERS += src/field_5x52_int128_impl.h
+-noinst_HEADERS += src/field_5x52_asm_impl.h
+ noinst_HEADERS += src/modinv32.h
+ noinst_HEADERS += src/modinv32_impl.h
+ noinst_HEADERS += src/modinv64.h
+diff --git a/README.md b/README.md
+index 8c32507..1b6eedd 100644
+--- a/README.md
++++ b/README.md
+@@ -33,7 +33,7 @@ Implementation details
+   * Expose only higher level interfaces to minimize the API surface and improve application security. ("Be difficult to use insecurely.")
+ * Field operations
+   * Optimized implementation of arithmetic modulo the curve's field size (2^256 - 0x1000003D1).
+-    * Using 5 52-bit limbs (including hand-optimized assembly for x86_64, by Diederik Huys).
++    * Using 5 52-bit limbs
+     * Using 10 26-bit limbs (including hand-optimized assembly for 32-bit ARM, by Wladimir J. van der Laan).
+       * This is an experimental feature that has not received enough scrutiny to satisfy the standard of quality of this library but is made available for testing and review by the community.
+ * Scalar operations
+diff --git a/src/field_5x52_impl.h b/src/field_5x52_impl.h
+index ecb7050..76031f7 100644
+--- a/src/field_5x52_impl.h
++++ b/src/field_5x52_impl.h
+@@ -12,11 +12,7 @@
+ #include "field.h"
+ #include "modinv64_impl.h"
+ 
+-#if defined(USE_ASM_X86_64)
+-#include "field_5x52_asm_impl.h"
+-#else
+ #include "field_5x52_int128_impl.h"
+-#endif
+ 
+ #ifdef VERIFY
+ static void secp256k1_fe_impl_verify(const secp256k1_fe *a) {
