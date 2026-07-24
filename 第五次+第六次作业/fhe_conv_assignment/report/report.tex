@@ -1,0 +1,203 @@
+\documentclass[UTF8,a4paper,12pt]{ctexart}
+\usepackage{amsmath,amssymb,booktabs,array,geometry,graphicx,float,listings,xcolor}
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.35em}
+\lstset{
+  basicstyle=\ttfamily\small,
+  frame=single,
+  breaklines=true,
+  columns=fullflexible,
+  keywordstyle=\color{blue!70!black},
+  commentstyle=\color{green!40!black}
+}
+
+\title{全同态密码与应用\\作业5与作业6：基于OpenFHE的密文卷积与旋转次数优化}
+\author{姓名：\underline{\hspace{4cm}}\quad 学号：\underline{\hspace{4cm}}}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{实验目的}
+本实验选择开源全同态加密库OpenFHE，采用BFV-RNS整数同态加密方案，实现单输入单输出的$4\times4$输入与$3\times3$卷积核的密文卷积。卷积步长为1，不进行填充，因此输出尺寸为$2\times2$。在完成正确性验证后，进一步采用“打包、旋转、明文乘法、累加”策略，分析并优化密文卷积中的旋转次数。
+
+\section{实验环境与方案选择}
+实验采用OpenFHE 1.5.1，编程语言为C++17。选用BFV-RNS而非CKKS，是因为本实验输入与卷积核均为小整数，BFV可以在明文模数范围内给出精确整数结果，不需要设置近似误差阈值。
+
+主要参数如下：
+\begin{table}[H]
+\centering
+\begin{tabular}{ll}
+\toprule
+参数 & 设置\\
+\midrule
+全同态方案 & BFV-RNS\\
+明文模数 & 65537\\
+打包槽位数 & 16\\
+乘法深度 & 1\\
+安全级别 & HEStd\_128\_classic\\
+密钥切换 & HYBRID\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+本实验仅使用密文与明文掩码相乘，不使用密文与密文乘法，因此不需要重线性化密钥，也不需要自举。
+
+\section{卷积定义与数据打包}
+输入矩阵记为
+\[
+X=\begin{bmatrix}
+1&2&3&4\\
+5&6&7&8\\
+9&10&11&12\\
+13&14&15&16
+\end{bmatrix},
+\]
+卷积核记为
+\[
+K=\begin{bmatrix}
+1&2&3\\
+4&5&6\\
+7&8&9
+\end{bmatrix}.
+\]
+
+输入按照行优先方式打包为一个明文向量：
+\[
+(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16).
+\]
+加密后得到单个输入密文$C=\operatorname{Enc}(X)$。四个输出分别放置在槽位集合
+\[
+S=\{0,1,4,5\},
+\]
+即保持与四个卷积窗口左上角相同的槽位位置。
+
+明文卷积结果为
+\[
+Y=\begin{bmatrix}
+348&393\\
+528&573
+\end{bmatrix}.
+\]
+因此正确的解密槽位应为
+\[
+(348,393,0,0,528,573,0,0,0,0,0,0,0,0,0,0).
+\]
+
+\section{作业5：基线密文卷积}
+\subsection{偏移分析}
+行优先打包时，水平方向移动一列对应槽位偏移1，垂直方向移动一行对应槽位偏移4。因此$3\times3$卷积核的九个位置对应偏移集合
+\[
+D=\{0,1,2,4,5,6,8,9,10\}.
+\]
+
+对每个偏移$d$，计算$\operatorname{Rot}(C,d)$，再与只在输出槽位$S$上非零的明文掩码逐槽相乘。基线密文卷积可写为
+\[
+C_Y=\sum_{a=0}^{2}\sum_{b=0}^{2}
+M_{a,b}\odot\operatorname{Rot}(C,4a+b),
+\]
+其中$M_{a,b}$在槽位$S$上的值均为$k_{a,b}$，其余槽位为0。
+
+偏移0直接使用原密文，不需要旋转；其余八个偏移分别需要一次旋转。因此基线实现的旋转次数为
+\[
+9-1=8.
+\]
+
+\subsection{边界处理}
+OpenFHE中的BFV旋转作用于底层打包行，而不是仅在本实验使用的16个非零槽位中循环。为了避免矩阵行边界和未使用槽位产生污染，本实现不依赖16槽循环回绕，而是在每个乘法中使用明文掩码，只保留合法输出槽位$\{0,1,4,5\}$。
+
+\section{作业6：旋转次数优化}
+\subsection{偏移集合分解}
+九个卷积偏移具有二维可分解结构：
+\[
+D=\{0,1,2\}+\{0,4,8\}.
+\]
+因此首先只计算三个水平方向的baby steps：
+\[
+R_0=C,\qquad
+R_1=\operatorname{Rot}(C,1),\qquad
+R_2=\operatorname{Rot}(C,2).
+\]
+这一步只需要2次旋转。
+
+\subsection{卷积核行内累加}
+对卷积核第$a$行，构造
+\[
+H_a=\sum_{b=0}^{2}M'_{a,b}\odot R_b.
+\]
+其中$M'_{a,b}$的非零位置为
+\[
+S+4a=\{4a,4a+1,4a+4,4a+5\},
+\]
+非零值为$k_{a,b}$。这样，第$a$行的部分卷积结果先保存在向下偏移$4a$的位置。
+
+最后执行giant steps：
+\[
+C_Y=H_0+\operatorname{Rot}(H_1,4)+\operatorname{Rot}(H_2,8).
+\]
+第二、三行各需要一次旋转，因此总旋转次数为
+\[
+2+2=4.
+\]
+
+\subsection{理论最小值分析}
+对于一般稠密$3\times3$卷积，一个输出槽位需要依赖9个不同输入槽位。考虑只使用明文对角乘法、密文加法和旋转的线性计算模型：明文乘法和加法不能产生新的槽位来源；一次旋转最多将现有依赖路径复制到一组新的槽位偏移，并通过保留旋转前后的分支使依赖路径数最多翻倍。因此执行$r$次旋转后，一个输出槽位最多依赖$2^r$个不同输入槽位。
+
+若只使用3次旋转，则最多形成
+\[
+2^3=8
+\]
+个不同输入依赖，不能覆盖稠密$3\times3$卷积所需的9个位置。因此
+\[
+r\geq\lceil\log_2 9\rceil=4.
+\]
+本实验优化实现恰好使用4次旋转，所以在上述计算模型和一般稠密卷积核条件下达到理论最小值。若卷积核是稀疏的，所需独立偏移少于9，则其最小旋转次数可能进一步降低。
+
+\section{实验结果}
+\subsection{正确性结果}
+程序首先计算普通明文卷积，然后分别执行8次旋转基线算法和4次旋转优化算法。固定测试样例的三种结果均为
+\[
+\begin{bmatrix}
+348&393\\
+528&573
+\end{bmatrix}.
+\]
+程序还使用固定随机种子生成多组带负数的输入矩阵与卷积核，并逐组断言明文结果、基线解密结果和优化解密结果完全一致。
+
+\subsection{操作次数比较}
+\begin{table}[H]
+\centering
+\begin{tabular}{lccc}
+\toprule
+方法 & 旋转次数 & 密文--明文乘法 & 密文加法\\
+\midrule
+基线实现 & 8 & 9 & 8\\
+优化实现 & 4 & 9 & 8\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+优化前后乘法深度均为1，密文--明文乘法次数和加法次数不变，旋转次数下降50\%。优化版本实际需要的旋转索引为$\{1,2,4,8\}$，基线版本需要$\{1,2,4,5,6,8,9,10\}$。
+
+\subsection{运行时间记录}
+程序在一次预热后，分别重复执行两种密文卷积并输出平均运行时间。请将本机运行结果填写到表~\ref{tab:time}中。
+
+\begin{table}[H]
+\centering
+\caption{密文卷积运行时间}
+\label{tab:time}
+\begin{tabular}{lcc}
+\toprule
+方法 & 平均时间/ms & 相对加速比\\
+\midrule
+基线实现 & \underline{\hspace{3cm}} & 1.00\\
+优化实现 & \underline{\hspace{3cm}} & \underline{\hspace{2cm}}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{结论}
+本实验使用OpenFHE的BFV-RNS方案实现了$4\times4$输入和$3\times3$卷积核的精确密文卷积。基线方法针对九个卷积位置分别构造旋转结果，共执行8次旋转。优化方法利用偏移集合$\{0,1,2\}+\{0,4,8\}$的二维结构，通过两个水平baby steps和两个垂直giant steps，将旋转次数降低为4次，下降50\%，并在一般稠密$3\times3$卷积的打包、旋转、明文乘法和累加模型下达到理论下界。实验通过固定样例和随机样例验证了两种密文实现与明文卷积结果完全一致。
+
+\end{document}

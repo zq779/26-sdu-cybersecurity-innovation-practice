@@ -1,0 +1,7 @@
+
+# OpenFHE作业编译文件
+作业5-6-全同态加密/build/
+*.o
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake

@@ -1,0 +1,15 @@
+Fixed example expected output
+=============================
+Plain 2x2 output:
+348 393
+528 573
+
+Expected first 16 decrypted slots:
+348 393 0 0
+528 573 0 0
+0   0   0 0
+0   0   0 0
+
+Expected operation counts:
+naive: rotations=8, ct-pt multiplications=9, additions=8
+optimized: rotations=4, ct-pt multiplications=9, additions=8

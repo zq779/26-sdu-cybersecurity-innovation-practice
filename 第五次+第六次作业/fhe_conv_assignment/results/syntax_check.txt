@@ -1,0 +1,1 @@
+C++ syntax check with OpenFHE API stub passed
