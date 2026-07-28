@@ -1,0 +1,10 @@
+[PASS] scalar vector empty
+[PASS] scalar vector abc
+[PASS] scalar vector abcd x 16
+CPU AVX2:    yes
+CPU AVX-512: yes
+[PASS] avx2-8way     edge/random differential (101 rounds, 8 messages)
+[PASS] avx512-16way  edge/random differential (101 rounds, 16 messages)
+[PASS] auto          edge/random differential (51 rounds, 37 messages)
+Best backend: avx512-16way
+All SM3 tests passed.

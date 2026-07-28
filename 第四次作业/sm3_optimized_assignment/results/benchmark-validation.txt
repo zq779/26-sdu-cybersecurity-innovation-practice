@@ -1,0 +1,7 @@
+SM3 multi-buffer benchmark
+message_bytes=4096 messages=16 iterations=1024 samples=7
+backend                   MiB/s      ns/byte      speedup
+scalar                  143.042       6.6671        1.000
+avx2-8way              1034.520       0.9219        7.232
+avx512-16way           1843.984       0.5172       12.891
+sink=29

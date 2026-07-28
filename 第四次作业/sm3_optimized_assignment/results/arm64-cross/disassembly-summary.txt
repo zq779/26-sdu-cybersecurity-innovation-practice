@@ -1,0 +1,31 @@
+ARM64 NEON evidence:
+      34: 4e040d05     	dup	v5.4s, w8
+      50: 4e040d06     	dup	v6.4s, w8
+      64: 6e601c22     	bsl	v2.16b, v1.16b, v0.16b
+      74: 4e040d03     	dup	v3.4s, w8
+      80: 4e040d04     	dup	v4.4s, w8
+      8c: 4e040d05     	dup	v5.4s, w8
+      a0: 4e040d06     	dup	v6.4s, w8
+      ac: 4e040d03     	dup	v3.4s, w8
+      bc: 4e040d04     	dup	v4.4s, w8
+      e4: 910002b5     	add	x21, x21, #0x0
+      f0: 321d0042     	orr	w2, w2, #0x8
+      f4: 8b170108     	add	x8, x8, x23
+      fc: 910103e1     	add	x1, sp, #0x40
+     108: 91000718     	add	x24, x24, #0x1
+     10c: 910102f7     	add	x23, x23, #0x40
+     128: 8b170108     	add	x8, x8, x23
+     13c: 321f0042     	orr	w2, w2, #0x2
+     140: 8b170108     	add	x8, x8, x23
+     154: 321e0042     	orr	w2, w2, #0x4
+     158: 8b170108     	add	x8, x8, x23
+     1a8: 910103e0     	add	x0, sp, #0x40
+     1b8: 910103f7     	add	x23, sp, #0x40
+     1cc: 910103e0     	add	x0, sp, #0x40
+     1d4: 8b080301     	add	x1, x24, x8
+     1fc: 910202f8     	add	x24, x23, #0x80
+     2bc: 8b080321     	add	x1, x25, x8
+     2d8: 910103fb     	add	x27, sp, #0x40
+     314: 91040379     	add	x25, x27, #0x100
+     3ac: 8b080381     	add	x1, x28, x8
+     464: 91060375     	add	x21, x27, #0x180

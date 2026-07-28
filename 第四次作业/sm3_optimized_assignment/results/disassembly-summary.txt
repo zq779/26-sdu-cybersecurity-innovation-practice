@@ -1,0 +1,36 @@
+objdump -d -Mintel build/sm3_avx2.o > build/sm3_avx2.asm
+objdump -d -Mintel build/sm3_avx512.o > build/sm3_avx512.asm
+AVX2 evidence:
+      75:	c5 fd 6f 44 24 48    	vmovdqa ymm0,YMMWORD PTR [rsp+0x48]
+      7b:	c5 fd 7f 04 d0       	vmovdqa YMMWORD PTR [rax+rdx*8],ymm0
+     123:	c5 fd 6f a4 24 08 02 	vmovdqa ymm4,YMMWORD PTR [rsp+0x208]
+     12c:	c5 fd 6f 74 24 68    	vmovdqa ymm6,YMMWORD PTR [rsp+0x68]
+     13f:	c5 fd 6f 9c 24 28 02 	vmovdqa ymm3,YMMWORD PTR [rsp+0x228]
+     148:	c5 fd 6f 84 24 48 02 	vmovdqa ymm0,YMMWORD PTR [rsp+0x248]
+     151:	c5 7d 6f 94 24 48 01 	vmovdqa ymm10,YMMWORD PTR [rsp+0x148]
+     15a:	c5 7d 6f 8c 24 68 01 	vmovdqa ymm9,YMMWORD PTR [rsp+0x168]
+     163:	c5 7d 6f 84 24 88 01 	vmovdqa ymm8,YMMWORD PTR [rsp+0x188]
+     16c:	c5 fd 6f ac 24 88 00 	vmovdqa ymm5,YMMWORD PTR [rsp+0x88]
+     175:	c5 fd 6f bc 24 a8 00 	vmovdqa ymm7,YMMWORD PTR [rsp+0xa8]
+     180:	c5 ed 72 d4 11       	vpsrld ymm2,ymm4,0x11
+     185:	c4 c1 4d ef ca       	vpxor  ymm1,ymm6,ymm10
+     18a:	c5 fd 6f 32          	vmovdqa ymm6,YMMWORD PTR [rdx]
+     191:	c5 dd 72 f4 0f       	vpslld ymm4,ymm4,0xf
+     196:	c5 7d 6f 92 e0 00 00 	vmovdqa ymm10,YMMWORD PTR [rdx+0xe0]
+AVX-512 evidence:
+      ad:	62 f1 fd 48 6f 8c 24 	vmovdqa64 zmm1,ZMMWORD PTR [rsp-0x38]
+      c0:	62 f1 fd 48 7f 4f ff 	vmovdqa64 ZMMWORD PTR [rdi-0x40],zmm1
+     229:	62 f1 fd 48 6f a4 24 	vmovdqa64 zmm4,ZMMWORD PTR [rsp+0x348]
+     23c:	62 f1 fd 48 6f 94 24 	vmovdqa64 zmm2,ZMMWORD PTR [rsp+0x388]
+     247:	62 f1 fd 48 6f 8c 24 	vmovdqa64 zmm1,ZMMWORD PTR [rsp+0x3c8]
+     252:	62 f1 fd 48 6f bc 24 	vmovdqa64 zmm7,ZMMWORD PTR [rsp+0x8]
+     25d:	62 f1 fd 48 6f b4 24 	vmovdqa64 zmm6,ZMMWORD PTR [rsp+0x48]
+     268:	62 71 fd 48 6f 94 24 	vmovdqa64 zmm10,ZMMWORD PTR [rsp+0x1c8]
+     273:	62 71 fd 48 6f 8c 24 	vmovdqa64 zmm9,ZMMWORD PTR [rsp+0x208]
+     27e:	62 71 fd 48 6f 84 24 	vmovdqa64 zmm8,ZMMWORD PTR [rsp+0x248]
+     289:	62 f1 fd 48 6f ac 24 	vmovdqa64 zmm5,ZMMWORD PTR [rsp+0x88]
+     2a0:	62 f1 5d 48 72 cc 0f 	vprold zmm4,zmm4,0xf
+     2a7:	62 f1 7d 48 6f c7    	vmovdqa32 zmm0,zmm7
+     2ad:	62 f1 fd 48 6f 38    	vmovdqa64 zmm7,ZMMWORD PTR [rax]
+     2b6:	62 f1 6d 48 72 ca 0f 	vprold zmm2,zmm2,0xf
+     2c3:	62 f1 75 48 72 c9 0f 	vprold zmm1,zmm1,0xf
