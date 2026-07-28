@@ -1,0 +1,6 @@
+build/
+*.o
+*.a
+*.asm
+report/latex_build_*/
+results/benchmark.txt

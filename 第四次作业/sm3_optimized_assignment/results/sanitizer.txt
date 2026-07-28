@@ -1,0 +1,26 @@
+make clean
+make[1]: Entering directory '/mnt/data/sm3_optimized_assignment'
+rm -rf build
+make[1]: Leaving directory '/mnt/data/sm3_optimized_assignment'
+make COMMON_CFLAGS='-std=c11 -O1 -g -Wall -Wextra -Wpedantic -Wshadow -fno-omit-frame-pointer -fsanitize=address,undefined' LDFLAGS='-fsanitize=address,undefined' test
+make[1]: Entering directory '/mnt/data/sm3_optimized_assignment'
+mkdir -p build
+cc -Iinclude -Isrc -std=c11 -O1 -g -Wall -Wextra -Wpedantic -Wshadow -fno-omit-frame-pointer -fsanitize=address,undefined -c tests/test_sm3.c -o build/test_sm3.o
+cc -Iinclude -Isrc -std=c11 -O1 -g -Wall -Wextra -Wpedantic -Wshadow -fno-omit-frame-pointer -fsanitize=address,undefined -c src/sm3_scalar.c -o build/sm3_scalar.o
+cc -Iinclude -Isrc -std=c11 -O1 -g -Wall -Wextra -Wpedantic -Wshadow -fno-omit-frame-pointer -fsanitize=address,undefined -c src/sm3_dispatch.c -o build/sm3_dispatch.o
+cc -Iinclude -Isrc -std=c11 -O1 -g -Wall -Wextra -Wpedantic -Wshadow -fno-omit-frame-pointer -fsanitize=address,undefined -mavx2 -c src/sm3_avx2.c -o build/sm3_avx2.o
+cc -Iinclude -Isrc -std=c11 -O1 -g -Wall -Wextra -Wpedantic -Wshadow -fno-omit-frame-pointer -fsanitize=address,undefined -mavx512f -c src/sm3_avx512.c -o build/sm3_avx512.o
+ar rcs build/libsm3opt.a build/sm3_scalar.o build/sm3_dispatch.o build/sm3_avx2.o build/sm3_avx512.o
+cc build/test_sm3.o build/libsm3opt.a -o build/sm3_test -fsanitize=address,undefined
+./build/sm3_test
+[PASS] scalar vector empty
+[PASS] scalar vector abc
+[PASS] scalar vector abcd x 16
+CPU AVX2:    yes
+CPU AVX-512: yes
+[PASS] avx2-8way     edge/random differential (101 rounds, 8 messages)
+[PASS] avx512-16way  edge/random differential (101 rounds, 16 messages)
+[PASS] auto          edge/random differential (51 rounds, 37 messages)
+Best backend: avx512-16way
+All SM3 tests passed.
+make[1]: Leaving directory '/mnt/data/sm3_optimized_assignment'

@@ -1,0 +1,1 @@
+[PASS] 128 files matched OpenSSL SM3; backend auto-dispatch exercised
