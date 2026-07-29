@@ -1,0 +1,12 @@
+garak LLM vulnerability scanner v0.15.1 ( https://github.com/NVIDIA/garak ) at 2026-07-28T14:00:08.027924
+📜 logging to /home/openhitals/.local/share/garak/garak.log
+🦜 loading [1m[95mgenerator[0m: Hugging Face 🤗 pipeline: /home/openhitals/garak-lab/models/Qwen2.5-0.5B-Instruct
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 6091.00it/s]
+📜 reporting to /home/openhitals/garak-lab/results/02_garak_qwen_connectivity.report.jsonl
+🕵️  queue of [1m[93mprobes:[0m test.Blank
+🔎 queue of [0m[94mdetectors:[0m always.Pass
+Preparing prompts:   0%|[38;2;0;243;180m          [0m| 0/1 [00:00<?, ?it/s]                                                          0%|          | 0/1 [00:00<?, ?it/s]probes.test.Blank:   0%|          | 0/1 [00:00<?, ?it/s][transformers] Ignoring clean_up_tokenization_spaces=True for BPE tokenizer Qwen2Tokenizer. The clean_up_tokenization post-processing step is designed for WordPiece tokenizers and is destructive for BPE (it strips spaces before punctuation). Set clean_up_tokenization_spaces=False to suppress this warning, or set clean_up_tokenization_spaces_for_bpe_even_though_it_will_corrupt_output=True to force cleanup anyway.
+probes.test.Blank: 100%|██████████| 1/1 [00:00<00:00,  1.29it/s]                                                                  0%|          | 0/1 [00:00<?, ?it/s]detectors.always.Pass:   0%|          | 0/1 [00:00<?, ?it/s]                                                            test.Blank                                                                               always.Pass: [1m[92mPASS[0m  ok on    1/   1
+📜 report closed :) /home/openhitals/garak-lab/results/02_garak_qwen_connectivity.report.jsonl
+📜 report html summary being written to /home/openhitals/garak-lab/results/02_garak_qwen_connectivity.report.html
+✔️  garak run complete in 3.62s

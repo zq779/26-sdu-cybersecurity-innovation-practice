@@ -1,0 +1,67 @@
+garak LLM vulnerability scanner v0.15.1 ( https://github.com/NVIDIA/garak ) at 2026-07-28T08:21:01.948072
+[1m[95mgenerators: [0mazure 🌟
+[1m[95mgenerators: [0mazure.AzureOpenAIGenerator
+[1m[95mgenerators: [0mbedrock 🌟
+[1m[95mgenerators: [0mbedrock.BedrockGenerator
+[1m[95mgenerators: [0mcohere 🌟
+[1m[95mgenerators: [0mcohere.CohereGenerator
+[1m[95mgenerators: [0mfunction 🌟
+[1m[95mgenerators: [0mfunction.Multiple
+[1m[95mgenerators: [0mfunction.Single
+[1m[95mgenerators: [0mggml 🌟
+[1m[95mgenerators: [0mggml.GgmlGenerator
+[1m[95mgenerators: [0mgroq 🌟
+[1m[95mgenerators: [0mgroq.GroqChat
+[1m[95mgenerators: [0mguardrails 🌟
+[1m[95mgenerators: [0mguardrails.NeMoGuardrails
+[1m[95mgenerators: [0mguardrails.NeMoGuardrailsServer
+[1m[95mgenerators: [0mhuggingface 🌟
+[1m[95mgenerators: [0mhuggingface.InferenceAPI
+[1m[95mgenerators: [0mhuggingface.InferenceEndpoint
+[1m[95mgenerators: [0mhuggingface.LLaVA
+[1m[95mgenerators: [0mhuggingface.Model
+[1m[95mgenerators: [0mhuggingface.Pipeline
+[1m[95mgenerators: [0mlangchain 🌟
+[1m[95mgenerators: [0mlangchain.LangChainLLMGenerator
+[1m[95mgenerators: [0mlangchain_serve 🌟
+[1m[95mgenerators: [0mlangchain_serve.LangChainServeLLMGenerator
+[1m[95mgenerators: [0mlitellm 🌟
+[1m[95mgenerators: [0mlitellm.LiteLLMGenerator
+[1m[95mgenerators: [0mllm 🌟
+[1m[95mgenerators: [0mllm.LLMGenerator
+[1m[95mgenerators: [0mmistral 🌟
+[1m[95mgenerators: [0mmistral.MistralGenerator
+[1m[95mgenerators: [0mnim 🌟
+[1m[95mgenerators: [0mnim.NVMultimodal
+[1m[95mgenerators: [0mnim.NVOpenAIChat
+[1m[95mgenerators: [0mnim.NVOpenAICompletion
+[1m[95mgenerators: [0mnim.Vision
+[1m[95mgenerators: [0mnvcf 🌟
+[1m[95mgenerators: [0mnvcf.NvcfChat
+[1m[95mgenerators: [0mnvcf.NvcfCompletion
+[1m[95mgenerators: [0mollama 🌟
+[1m[95mgenerators: [0mollama.OllamaGenerator
+[1m[95mgenerators: [0mollama.OllamaGeneratorChat
+[1m[95mgenerators: [0mopenai 🌟
+[1m[95mgenerators: [0mopenai.OpenAICompatible
+[1m[95mgenerators: [0mopenai.OpenAIGenerator
+[1m[95mgenerators: [0mopenai.OpenAIReasoningGenerator
+[1m[95mgenerators: [0mrasa 🌟
+[1m[95mgenerators: [0mrasa.RasaRestGenerator
+[1m[95mgenerators: [0mreplicate 🌟
+[1m[95mgenerators: [0mreplicate.InferenceEndpoint
+[1m[95mgenerators: [0mreplicate.ReplicateGenerator
+[1m[95mgenerators: [0mrest 🌟
+[1m[95mgenerators: [0mrest.RestGenerator
+[1m[95mgenerators: [0mtest 🌟
+[1m[95mgenerators: [0mtest.Blank
+[1m[95mgenerators: [0mtest.BlankVision
+[1m[95mgenerators: [0mtest.Lipsum
+[1m[95mgenerators: [0mtest.Nones
+[1m[95mgenerators: [0mtest.ReasoningLipsum
+[1m[95mgenerators: [0mtest.Repeat
+[1m[95mgenerators: [0mtest.Single
+[1m[95mgenerators: [0mwatsonx 🌟
+[1m[95mgenerators: [0mwatsonx.WatsonXGenerator
+[1m[95mgenerators: [0mwebsocket 🌟
+[1m[95mgenerators: [0mwebsocket.WebSocketGenerator

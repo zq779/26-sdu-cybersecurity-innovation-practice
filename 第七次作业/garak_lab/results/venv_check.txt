@@ -1,0 +1,16 @@
+========== 虚拟环境创建时间 ==========
+2026-07-27T09:43:35+08:00
+
+========== Python路径 ==========
+/home/openhitals/garak-lab/.venv/bin/python
+
+========== Python版本 ==========
+Python 3.10.12
+
+========== pip版本 ==========
+pip 26.1.2 from /home/openhitals/garak-lab/.venv/lib/python3.10/site-packages/pip (python 3.10)
+
+========== 基础工具 ==========
+git version 2.34.1
+curl 7.81.0 (x86_64-pc-linux-gnu) libcurl/7.81.0 OpenSSL/3.0.2 zlib/1.2.11 brotli/1.0.9 zstd/1.4.8 libidn2/2.3.2 libpsl/0.21.0 (+libidn2/2.3.2) libssh/0.9.6/openssl/zlib nghttp2/1.43.0 librtmp/2.3 OpenLDAP/2.5.18
+jq-1.6

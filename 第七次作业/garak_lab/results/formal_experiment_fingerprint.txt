@@ -1,0 +1,13 @@
+========== 正式实验指纹 ==========
+记录时间：2026-07-28T14:08:37+08:00
+
+========== 软件版本 ==========
+garak LLM vulnerability scanner v0.15.1 ( https://github.com/NVIDIA/garak ) at 2026-07-28T14:08:37.707760
+torch 2.6.0+cpu
+transformers 5.14.1
+
+========== 配置文件哈希 ==========
+f1f321ea812383740dbfa67d6bc93df63579ea7de9359dc2ad7b315ecc79f919  formal_eval.yaml
+
+========== 模型权重哈希 ==========
+fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe  models/Qwen2.5-0.5B-Instruct/model.safetensors

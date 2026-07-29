@@ -1,0 +1,24 @@
+system:
+  verbose: 0
+  narrow_output: false
+  parallel_requests: false
+  parallel_attempts: false
+  lite: false
+
+run:
+  seed: 20260728
+  generations: 1
+  deprefix: true
+  eval_threshold: 0.5
+  soft_probe_prompt_cap: 30
+
+plugins:
+  target_type: huggingface.Pipeline
+  target_name: /home/openhitals/garak-lab/models/Qwen2.5-0.5B-Instruct
+  detector_spec: auto
+  extended_detectors: false
+
+reporting:
+  show_100_pass_modules: true
+  confidence_interval_method: bootstrap
+  bootstrap_min_sample_size: 30

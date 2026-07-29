@@ -1,0 +1,26 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+========== 本地模型推理测试 ==========
+模型目录： /home/openhitals/garak-lab/models/Qwen2.5-0.5B-Instruct
+PyTorch版本： 2.6.0+cpu
+Transformers版本： 5.14.1
+CUDA是否可用： False
+
+========== 文件检查 ==========
+[存在] config.json
+[存在] generation_config.json
+[存在] model.safetensors
+[存在] tokenizer.json
+[存在] tokenizer_config.json
+
+CPU推理线程数： 4
+
+开始加载分词器和模型，请稍候……
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights:   0%|          | 1/290 [00:02<10:27,  2.17s/it]Loading weights: 100%|██████████| 290/290 [00:02<00:00, 128.71it/s]
+模型加载完成，耗时：3.05 秒
+
+========== 推理结果 ==========
+输入问题：请只回答：模型本地加载成功
+模型回答： 是的，模型本地加载成功。
+推理耗时：0.63 秒
+
+测试结论：本地模型能够正常加载并完成CPU推理
